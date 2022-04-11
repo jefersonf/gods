@@ -1,4 +1,4 @@
-package trees
+package fenwick
 
 import (
 	"testing"

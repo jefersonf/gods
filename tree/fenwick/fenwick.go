@@ -1,4 +1,4 @@
-package trees
+package fenwick
 
 // Integer represents a generic interface for integer values.
 type Integer interface {
@@ -84,7 +84,7 @@ func (t *BinaryIndexed[T]) SumRange(i, j int) T {
 	return sum
 }
 
-// Append appends a new element into BinaryIndexed.
+// Append appends a new element into BinaryIndexed tree.
 func (t *BinaryIndexed[T]) Append(val T) {
 	i := len(t.data)
 	t.data = append(t.data, 0)
