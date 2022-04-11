@@ -18,10 +18,15 @@ type Float interface {
 type Number interface {
 	Integer | Float
 }
+
+// SegNode is a segment tree node whose value could be anything comparable.
 type SegNode[T any] struct {
 	value T
 }
 
+// Segment represents a slice of SegNodes with support for efficient
+// range queries like sum, minimum, maximum, and any function that combines
+// two nodes into a new one called segment.
 type Segment[T any] struct {
 	data     []SegNode[T]
 	size     uint
@@ -29,9 +34,11 @@ type Segment[T any] struct {
 }
 
 var (
+	// errSegNodeDoNotExist is an error that accurs whenever an invalid segnode id is accessed.
 	errSegNodeDoNotExist = errors.New("segnode id does not exist")
 )
 
+// New creates a new SegmentTree with the given elements.
 func New[T any](a []T, f func(n1, n2 *SegNode[T]) SegNode[T]) *Segment[T] {
 	n := len(a)
 	var b uint = 1
@@ -53,6 +60,7 @@ func New[T any](a []T, f func(n1, n2 *SegNode[T]) SegNode[T]) *Segment[T] {
 	return segtree
 }
 
+// Build builds a segment tree with the given elements.
 func (t *Segment[T]) Build(id uint, l, r uint, a []T) {
 	if l == r {
 		t.data[id].value = a[l-1]
@@ -64,10 +72,13 @@ func (t *Segment[T]) Build(id uint, l, r uint, a []T) {
 	t.data[id] = t.joinFunc(&t.data[id*2], &t.data[id*2+1])
 }
 
+// Size returns the size of the segment tree.
 func (t *Segment[T]) Size() uint {
 	return t.size
 }
 
+// GetNodeByID returns a SegNode for a given id and an error
+// when the given id is invalid.
 func (t *Segment[T]) GetNodeByID(id uint) (SegNode[T], error) {
 	if id == 0 || id > uint(len(t.data)) {
 		return SegNode[T]{}, errSegNodeDoNotExist
@@ -75,11 +86,15 @@ func (t *Segment[T]) GetNodeByID(id uint) (SegNode[T], error) {
 	return t.data[id], nil
 }
 
+// Set updates the segment tree data by its position.
 func (t *Segment[T]) Set(pos int, val T) {
 	b := len(t.data) / 2
 	t.update(1, 1, b, pos, val)
 }
 
+// QueryRange queries the segnode from the segment tree that is
+// responsible for the given range [l, r] and an error when that
+// interval is invalid.
 func (t *Segment[T]) QueryRange(l, r int) (SegNode[T], error) {
 	if l < 1 || r > int(t.size) {
 		return SegNode[T]{}, errSegNodeDoNotExist
