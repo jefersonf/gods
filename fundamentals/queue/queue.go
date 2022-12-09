@@ -18,7 +18,7 @@ type Number interface {
 }
 
 var (
-	// errSegNodeDoNotExist is an error that accurs whenever an invalid segnode id is accessed.
+	// errIndexOutOfBound is an error that accurs whenever an invalid invalid index is accessed.
 	errIndexOutOfBound = errors.New("index out of bound")
 )
 
