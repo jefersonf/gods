@@ -2,32 +2,24 @@ package segment
 
 import (
 	"errors"
+
+	"golang.org/x/exp/constraints"
 )
-
-// Integer represents a generic interface for integer values.
-type Integer interface {
-	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64
-}
-
-// Float represents a generic interface for floating-point values.
-type Float interface {
-	float32 | float64
-}
 
 // Number represents a Numeric value.
 type Number interface {
-	Integer | Float
+	constraints.Float | constraints.Integer
 }
 
 // SegNode is a segment tree node whose value could be anything comparable.
-type SegNode[T any] struct {
+type SegNode[T Number] struct {
 	value T
 }
 
 // Segment represents a slice of SegNodes with support for efficient
 // range queries like sum, minimum, maximum, and any function that combines
 // two nodes into a new one called segment.
-type Segment[T any] struct {
+type Segment[T Number] struct {
 	data     []SegNode[T]
 	size     uint
 	joinFunc func(n1, n2 *SegNode[T]) SegNode[T]
@@ -39,7 +31,7 @@ var (
 )
 
 // New creates a new SegmentTree with the given elements.
-func New[T any](a []T, f func(n1, n2 *SegNode[T]) SegNode[T]) *Segment[T] {
+func New[T Number](a []T, f func(n1, n2 *SegNode[T]) SegNode[T]) *Segment[T] {
 	n := len(a)
 	var b uint = 1
 	for b < uint(n) {
