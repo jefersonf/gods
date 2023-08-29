@@ -1,5 +1,6 @@
-# go-ds
-go uncommon data structures
+# Go Data Structures
+
+Go (uncommon) data structures
 
 ## Requirements
 
