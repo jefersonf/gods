@@ -1,11 +1,11 @@
-package ahocorasick
+package trie
 
 import (
 	"fmt"
 	"testing"
 )
 
-func TestTrieHeight(t *testing.T) {
+func TestHeight(t *testing.T) {
 
 	testcases := []struct {
 		stringSet  []string
