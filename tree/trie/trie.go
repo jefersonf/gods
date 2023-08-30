@@ -4,12 +4,12 @@
 package trie
 
 type Trie struct {
-	levels []Level
+	levels    []Level
+	wordCount int
 }
 
 type Level struct {
 	encodedAlphabet rune
-	counter         int
 	output          bool
 }
 
@@ -27,7 +27,9 @@ func (t *Trie) AddString(s string) {
 		}
 		t.levels[i].encodedAlphabet |= (1 << (c - 'a'))
 	}
-	t.levels[i].counter += 1
+	if !t.levels[i].output {
+		t.wordCount += 1
+	}
 	t.levels[i].output = true
 }
 
@@ -50,6 +52,10 @@ func (t *Trie) CheckString(s string) bool {
 
 func (t *Trie) Height() int {
 	return len(t.levels)
+}
+
+func (t *Trie) WordCount() int {
+	return t.wordCount
 }
 
 func New() *Trie {
