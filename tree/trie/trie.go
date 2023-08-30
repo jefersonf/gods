@@ -1,7 +1,7 @@
 // simple Trie implementation
 // limitations: does not work with non-english alphabet
 // this means that it won't work for words with more than one byte unicode size.
-package ahocorasick
+package trie
 
 type Trie struct {
 	levels []Level
