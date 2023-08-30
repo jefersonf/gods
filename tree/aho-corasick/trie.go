@@ -47,6 +47,10 @@ func (t *Trie) CheckString(s string) bool {
 	return t.levels[i].output
 }
 
+func (t *Trie) Height() int {
+	return len(t.levels)
+}
+
 func New() *Trie {
 	return &Trie{
 		levels: make([]Level, 0),
