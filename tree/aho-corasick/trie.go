@@ -1,6 +1,7 @@
+// simple Trie implementation
+// limitations: does not work with non-english alphabet
+// this means that it won't work for words with more than one byte unicode size.
 package ahocorasick
-
-import "fmt"
 
 type Trie struct {
 	levels []Level
@@ -55,30 +56,4 @@ func New() *Trie {
 	return &Trie{
 		levels: make([]Level, 0),
 	}
-}
-
-func main() {
-
-	// simple Trie implementation
-	// limitations: does not work with non-english alphabet
-	// this means that it won't work for words with more than one byte unicode size.
-
-	t := Trie{}
-	t.AddString("abc")
-	t.AddString("ab")
-	t.AddString("acced")
-
-	fmt.Println("zyxwvutsrqponmlkjihgfedcba")
-	for _, lvl := range t.levels {
-		fmt.Printf("%026b %d %t\n", lvl.encodedAlphabet, lvl.counter, lvl.output)
-	}
-
-	fmt.Println(t.CheckString("abc"))
-	fmt.Println(t.CheckString("ab"))
-	fmt.Println(t.CheckString("acced"))
-	fmt.Println(t.CheckString("asdsd"))
-	fmt.Println(t.CheckString("ca"))
-	fmt.Println(t.CheckString("bc"))
-	fmt.Println(t.CheckString("a"))
-	fmt.Println(t.CheckString(""))
 }
