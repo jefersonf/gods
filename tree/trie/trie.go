@@ -15,19 +15,24 @@ type Level struct {
 
 func (t *Trie) AddString(s string) {
 	var (
-		i int
-		c rune
+		i         int
+		c         rune
+		isNewWord bool = false
 	)
 	for i, c = range s {
 		if len(t.levels) < i+1 {
 			t.levels = append(t.levels, Level{
-				encodedAlphabet: 1 << (c - 'a'),
+				encodedAlphabet: 0,
 				output:          false,
 			})
 		}
+		pos := rune(1 << (c - 'a'))
+		if t.levels[i].encodedAlphabet&pos == 0 {
+			isNewWord = true
+		}
 		t.levels[i].encodedAlphabet |= (1 << (c - 'a'))
 	}
-	if !t.levels[i].output {
+	if isNewWord {
 		t.wordCount += 1
 	}
 	t.levels[i].output = true
@@ -47,7 +52,7 @@ func (t *Trie) CheckString(s string) bool {
 			return false
 		}
 	}
-	return t.levels[i].output
+	return true
 }
 
 func (t *Trie) Height() int {
