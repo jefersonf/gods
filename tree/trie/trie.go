@@ -10,7 +10,7 @@ type Trie struct {
 
 type Level struct {
 	encodedAlphabet rune
-	output          bool
+	hasOutput       bool
 }
 
 func (t *Trie) AddString(s string) {
@@ -23,7 +23,7 @@ func (t *Trie) AddString(s string) {
 		if len(t.levels) < i+1 {
 			t.levels = append(t.levels, Level{
 				encodedAlphabet: 0,
-				output:          false,
+				hasOutput:       false,
 			})
 		}
 		pos := rune(1 << (c - 'a'))
@@ -35,7 +35,7 @@ func (t *Trie) AddString(s string) {
 	if isNewWord {
 		t.wordCount += 1
 	}
-	t.levels[i].output = true
+	t.levels[i].hasOutput = true
 }
 
 func (t *Trie) CheckString(s string) bool {
