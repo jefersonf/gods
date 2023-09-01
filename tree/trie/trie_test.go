@@ -5,84 +5,64 @@ import (
 	"testing"
 )
 
-func TestHeight(t *testing.T) {
+func TestSearchWord(t *testing.T) {
 
 	testcases := []struct {
-		stringSet  []string
-		trieHeight int
+		wordSet      []string
+		word         string
+		searchResult bool
 	}{
 		{
-			stringSet:  []string{},
-			trieHeight: 0,
+			wordSet:      []string{},
+			word:         "",
+			searchResult: true,
 		},
 		{
-			stringSet:  []string{"foo"},
-			trieHeight: 3,
+			wordSet:      []string{""},
+			word:         "",
+			searchResult: true,
 		},
 		{
-			stringSet:  []string{"pot", "bowl"},
-			trieHeight: 4,
+			wordSet:      []string{""},
+			word:         "a",
+			searchResult: false,
 		},
 		{
-			stringSet:  []string{"paper", "crayons", "notebook"},
-			trieHeight: 8,
+			wordSet:      []string{"a", "z"},
+			word:         "",
+			searchResult: true,
 		},
 		{
-			stringSet:  []string{"chair", "desk", "calculator", "pencil"},
-			trieHeight: 10,
+			wordSet:      []string{"a", "z"},
+			word:         "a",
+			searchResult: true,
+		},
+		{
+			wordSet:      []string{"a", "z"},
+			word:         "b",
+			searchResult: false,
+		},
+		{
+			wordSet:      []string{"apple", "banana", "grapes"},
+			word:         "banana",
+			searchResult: true,
+		},
+		{
+			wordSet:      []string{"apple", "banana", "grapes"},
+			word:         "strawberry",
+			searchResult: false,
 		},
 	}
 
 	for i, tc := range testcases {
-		t.Run(fmt.Sprintf("StringSet_%d", i), func(t *testing.T) {
+		t.Run(fmt.Sprintf("WordSet %d", i), func(t *testing.T) {
 			trie := New()
-			for _, s := range tc.stringSet {
-				trie.AddString(s)
+			for _, w := range tc.wordSet {
+				trie.AddString(w)
 			}
-			trieHeight := trie.Height()
-			if trieHeight != tc.trieHeight {
-				t.Errorf("Incorrect trie size; got %d, want %d", trieHeight, tc.trieHeight)
-			}
-		})
-	}
-}
-
-func TestCounter(t *testing.T) {
-
-	testcases := []struct {
-		stringSet []string
-		wordCount int
-	}{
-		{
-			stringSet: []string{},
-			wordCount: 0,
-		},
-		{
-			stringSet: []string{"foo"},
-			wordCount: 1,
-		},
-		{
-			stringSet: []string{"a", "b", "c"},
-			wordCount: 3,
-		},
-		{
-			stringSet: []string{"foo", "boo", "foo", "bang"},
-			wordCount: 3,
-		},
-		{
-			stringSet: []string{"abc", "acb", "bac", "bca", "cab", "cba"},
-			wordCount: 6,
-		},
-	}
-
-	for i, tc := range testcases {
-		t.Run(fmt.Sprintf("StringSet_%d", i), func(t *testing.T) {
-			trie := New()
-			for _, s := range tc.stringSet {
-				trie.AddString(s)
-			}
-			if trie.WordCount() != tc.wordCount {
-				t.Errorf("Incorrect trie word count; got %d, want %d", trie.WordCount(), tc.wordCount)
+			hasFound := trie.SearchWord(tc.word)
+			if hasFound != tc.searchResult {
+				t.Errorf("Got %t, want %t", hasFound, tc.searchResult)
 			}
 		})
 	}
