@@ -41,6 +41,7 @@ func NewNode(char rune) *Node {
 		next: make([]*Node, 26),
 	}
 }
+
 func New() *Trie {
 	return &Trie{rootNode: NewNode('$')}
 }
