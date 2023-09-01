@@ -5,6 +5,52 @@ import (
 	"testing"
 )
 
+func TestHeight(t *testing.T) {
+
+	testcases := []struct {
+		stringSet  []string
+		trieHeight int
+	}{
+		{
+			stringSet:  []string{},
+			trieHeight: 0,
+		},
+		{
+			stringSet:  []string{"a"},
+			trieHeight: 1,
+		},
+		{
+			stringSet:  []string{"foo"},
+			trieHeight: 3,
+		},
+		{
+			stringSet:  []string{"Pot", "Bowl"},
+			trieHeight: 4,
+		},
+		{
+			stringSet:  []string{"Paper and Crayons", "Notebook"},
+			trieHeight: 15,
+		},
+		{
+			stringSet:  []string{"Once upon a time in South America", "A good story"},
+			trieHeight: 27,
+		},
+	}
+
+	for i, tc := range testcases {
+		t.Run(fmt.Sprintf("StringSet_%d", i), func(t *testing.T) {
+			trie := New()
+			for _, s := range tc.stringSet {
+				trie.AddString(s)
+			}
+			trieHeight := trie.Height()
+			if trieHeight != tc.trieHeight {
+				t.Errorf("Incorrect trie size; got %d, want %d", trieHeight, tc.trieHeight)
+			}
+		})
+	}
+}
+
 func TestSearchWord(t *testing.T) {
 
 	testcases := []struct {
