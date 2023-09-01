@@ -4,67 +4,43 @@
 package trie
 
 type Trie struct {
-	levels    []Level
-	wordCount int
+	rootNode *Node
 }
 
-type Level struct {
-	encodedAlphabet rune
-	hasOutput       bool
+type Node struct {
+	char rune
+	next []*Node
 }
 
-func (t *Trie) AddString(s string) {
-	var (
-		i         int
-		c         rune
-		isNewWord bool = false
-	)
-	for i, c = range s {
-		if len(t.levels) < i+1 {
-			t.levels = append(t.levels, Level{
-				encodedAlphabet: 0,
-				hasOutput:       false,
-			})
+func (t *Trie) AddString(word string) {
+	curNode := t.rootNode
+	for _, c := range word {
+		index := c - 'a'
+		if curNode.next[index] == nil {
+			curNode.next[index] = NewNode(c)
 		}
-		pos := rune(1 << (c - 'a'))
-		if t.levels[i].encodedAlphabet&pos == 0 {
-			isNewWord = true
-		}
-		t.levels[i].encodedAlphabet |= (1 << (c - 'a'))
+		curNode = curNode.next[index]
 	}
-	if isNewWord {
-		t.wordCount += 1
-	}
-	t.levels[i].hasOutput = true
 }
 
-func (t *Trie) CheckString(s string) bool {
-	if len(s) > len(t.levels) {
-		return false
-	}
-	var (
-		i int
-		c rune
-	)
-	for i, c = range s {
-		pos := rune(1 << (c - 'a'))
-		if t.levels[i].encodedAlphabet&pos == 0 {
+func (t *Trie) SearchWord(word string) bool {
+	curNode := t.rootNode
+	for _, c := range word {
+		index := c - 'a'
+		if curNode.next[index] == nil {
 			return false
 		}
+		curNode = curNode.next[index]
 	}
 	return true
 }
 
-func (t *Trie) Height() int {
-	return len(t.levels)
-}
-
-func (t *Trie) WordCount() int {
-	return t.wordCount
-}
-
-func New() *Trie {
-	return &Trie{
-		levels: make([]Level, 0),
+func NewNode(char rune) *Node {
+	return &Node{
+		char: char,
+		next: make([]*Node, 26),
 	}
+}
+func New() *Trie {
+	return &Trie{rootNode: NewNode('$')}
 }
