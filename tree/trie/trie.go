@@ -7,6 +7,7 @@ import "strings"
 
 type Trie struct {
 	rootNode *Node
+	height   int
 }
 
 type Node struct {
@@ -24,6 +25,7 @@ func (t *Trie) AddString(word string) {
 		}
 		curNode = curNode.next[index]
 	}
+	t.height = max(t.height, len(normWord))
 }
 
 func (t *Trie) SearchWord(word string) bool {
@@ -37,6 +39,10 @@ func (t *Trie) SearchWord(word string) bool {
 		curNode = curNode.next[index]
 	}
 	return true
+}
+
+func (t *Trie) Height() int {
+	return t.height
 }
 
 func normalizeWord(word string) string {
