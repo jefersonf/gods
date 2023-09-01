@@ -3,6 +3,8 @@
 // this means that it won't work for words with more than one byte unicode size.
 package trie
 
+import "strings"
+
 type Trie struct {
 	rootNode *Node
 }
@@ -14,7 +16,8 @@ type Node struct {
 
 func (t *Trie) AddString(word string) {
 	curNode := t.rootNode
-	for _, c := range word {
+	normWord := normalizeWord(word)
+	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
 			curNode.next[index] = NewNode(c)
@@ -25,7 +28,8 @@ func (t *Trie) AddString(word string) {
 
 func (t *Trie) SearchWord(word string) bool {
 	curNode := t.rootNode
-	for _, c := range word {
+	normWord := normalizeWord(word)
+	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
 			return false
@@ -33,6 +37,10 @@ func (t *Trie) SearchWord(word string) bool {
 		curNode = curNode.next[index]
 	}
 	return true
+}
+
+func normalizeWord(word string) string {
+	return strings.ToLower(strings.ReplaceAll(word, " ", ""))
 }
 
 func NewNode(char rune) *Node {
