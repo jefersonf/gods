@@ -113,3 +113,71 @@ func TestSearchWord(t *testing.T) {
 		})
 	}
 }
+
+func TestCountWord(t *testing.T) {
+
+	testcases := []struct {
+		wordSet     []string
+		word        string
+		countResult int
+	}{
+		{
+			wordSet:     []string{},
+			word:        "",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{""},
+			word:        "",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{""},
+			word:        "a",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{"a", "z"},
+			word:        "",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{"a", "z"},
+			word:        "a",
+			countResult: 1,
+		},
+		{
+			wordSet:     []string{"a", "z"},
+			word:        "b",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{"apple", "banana", "grapes"},
+			word:        "banana",
+			countResult: 1,
+		},
+		{
+			wordSet:     []string{"apple", "banana", "grapes"},
+			word:        "strawberry",
+			countResult: 0,
+		},
+		{
+			wordSet:     []string{"apple", "banana", "grapes", "banana", "banana"},
+			word:        "banana",
+			countResult: 3,
+		},
+	}
+
+	for i, tc := range testcases {
+		t.Run(fmt.Sprintf("WordSet %d", i), func(t *testing.T) {
+			trie := New()
+			for _, w := range tc.wordSet {
+				trie.AddString(w)
+			}
+			wordCount := trie.CountWord(tc.word)
+			if wordCount != tc.countResult {
+				t.Errorf("Got %d, want %d", wordCount, tc.countResult)
+			}
+		})
+	}
+}
