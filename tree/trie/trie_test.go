@@ -181,3 +181,45 @@ func TestCountWord(t *testing.T) {
 		})
 	}
 }
+
+func TestWordCount(t *testing.T) {
+
+	testcases := []struct {
+		wordSet   []string
+		wordCount int
+	}{
+		{
+			wordSet:   []string{},
+			wordCount: 0,
+		},
+		{
+			wordSet:   []string{""},
+			wordCount: 0,
+		},
+		{
+			wordSet:   []string{"z"},
+			wordCount: 1,
+		},
+		{
+			wordSet:   []string{"f", "o", "o"},
+			wordCount: 2,
+		},
+		{
+			wordSet:   []string{"apple", "apples"},
+			wordCount: 2,
+		},
+	}
+
+	for i, tc := range testcases {
+		t.Run(fmt.Sprintf("WordSet %d", i), func(t *testing.T) {
+			trie := New()
+			for _, w := range tc.wordSet {
+				trie.AddString(w)
+			}
+			wordCount := trie.WordCount()
+			if wordCount != tc.wordCount {
+				t.Errorf("Got %d, want %d", wordCount, tc.wordCount)
+			}
+		})
+	}
+}
