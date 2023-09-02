@@ -47,7 +47,7 @@ func (t *Trie) SearchWord(word string) bool {
 	return true
 }
 
-func (t *Trie) CountWord(word string) (wordCount int) {
+func (t *Trie) CountWord(word string) (count int) {
 	curNode := t.rootNode
 	normWord := normalizeWord(word)
 	for _, c := range normWord {
@@ -57,7 +57,28 @@ func (t *Trie) CountWord(word string) (wordCount int) {
 		}
 		curNode = curNode.next[index]
 	}
-	wordCount = curNode.endWordCount
+	count = curNode.endWordCount
+	return
+}
+
+func (t *Trie) WordCount() (wordCount int) {
+	queue := make([]*Node, 26)
+	copy(queue, t.rootNode.next)
+	for len(queue) > 0 {
+		topNode := queue[0]
+		newQueue := make([]*Node, len(queue)-1)
+		copy(newQueue, queue[1:])
+		queue = newQueue
+		if topNode == nil {
+			continue
+		}
+		if topNode.endWordCount > 0 {
+			wordCount += 1
+		}
+		if topNode.next != nil {
+			queue = append(queue, topNode.next...)
+		}
+	}
 	return
 }
 
