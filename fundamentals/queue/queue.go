@@ -67,3 +67,7 @@ func (q *Queue[T]) PopFront() (T, error) {
 func (q Queue[T]) Size() int64 {
 	return q.size
 }
+
+func (q Queue[T]) IsEmpty() bool {
+	return q.size == 0
+}
