@@ -3,7 +3,9 @@
 // this means that it won't work for words with more than one byte unicode size.
 package trie
 
-import "strings"
+import (
+	"strings"
+)
 
 type Trie struct {
 	rootNode *Node
@@ -11,8 +13,9 @@ type Trie struct {
 }
 
 type Node struct {
-	char rune
-	next []*Node
+	char         rune
+	next         []*Node
+	endWordCount int
 }
 
 func (t *Trie) AddString(word string) {
@@ -24,6 +27,9 @@ func (t *Trie) AddString(word string) {
 			curNode.next[index] = NewNode(c)
 		}
 		curNode = curNode.next[index]
+	}
+	if len(word) > 0 {
+		curNode.endWordCount += 1
 	}
 	t.height = max(t.height, len(normWord))
 }
@@ -39,6 +45,20 @@ func (t *Trie) SearchWord(word string) bool {
 		curNode = curNode.next[index]
 	}
 	return true
+}
+
+func (t *Trie) CountWord(word string) (wordCount int) {
+	curNode := t.rootNode
+	normWord := normalizeWord(word)
+	for _, c := range normWord {
+		index := c - 'a'
+		if curNode.next[index] == nil {
+			return
+		}
+		curNode = curNode.next[index]
+	}
+	wordCount = curNode.endWordCount
+	return
 }
 
 func (t *Trie) Height() int {
