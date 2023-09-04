@@ -29,7 +29,7 @@ func TestPopBack(t *testing.T) {
 	if v != 2 {
 		t.Errorf("got %v, want %v", v, 2)
 	}
-	if q1.size != int64(sz-1) {
+	if q1.size != uint64(sz-1) {
 		t.Errorf("got %v, want %v", sz, sz-1)
 	}
 	a := make([]int, 0)
@@ -50,7 +50,7 @@ func TestPopFront(t *testing.T) {
 	if v != 1 {
 		t.Errorf("got %v, want %v", v, 1)
 	}
-	if q1.size != int64(sz-1) {
+	if q1.size != uint64(sz-1) {
 		t.Errorf("got %v, want %v", sz, sz-1)
 	}
 	a := make([]int, 0)
@@ -74,7 +74,7 @@ func TestPush(t *testing.T) {
 	if front != v {
 		t.Errorf("got %v, want %v", front, v)
 	}
-	if q1.size != int64(sz+1) {
+	if q1.size != uint64(sz+1) {
 		t.Errorf("got %v, want %v", q1.size, sz-1)
 	}
 }
