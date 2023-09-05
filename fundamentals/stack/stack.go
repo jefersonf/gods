@@ -2,17 +2,10 @@ package stack
 
 import (
 	"errors"
-
-	"golang.org/x/exp/constraints"
 )
 
-// Number represents a numeric value.
-type Number interface {
-	constraints.Float | constraints.Integer
-}
-
-type Stack[T Number] struct {
-	size int64
+type Stack[T any] struct {
+	size uint64
 	data []T
 }
 
@@ -21,28 +14,30 @@ var (
 	errIndexOutOfBound = errors.New("index out of bound")
 )
 
-func New[T Number](nums ...T) *Stack[T] {
+func New[T any](nums ...T) *Stack[T] {
 	return &Stack[T]{
-		size: int64(len(nums)),
+		size: uint64(len(nums)),
 		data: nums,
 	}
 }
 
-func (s *Stack[T]) Top() (T, error) {
+func (s *Stack[T]) Top() (v T, err error) {
 	if s.size < 1 {
-		return 0, errIndexOutOfBound
+		err = errIndexOutOfBound
+		return v, err
 	}
 	top := s.data[s.size-1]
-	return top, nil
+	return top, err
 }
 
-func (s *Stack[T]) Pop() (T, error) {
+func (s *Stack[T]) Pop() (v T, err error) {
 	if s.size < 1 {
-		return 0, errIndexOutOfBound
+		err = errIndexOutOfBound
+		return v, err
 	}
 	top := s.data[s.size-1]
 	s.size -= 1
-	return top, nil
+	return top, err
 }
 
 func (s *Stack[T]) Push(x T) {
@@ -50,6 +45,6 @@ func (s *Stack[T]) Push(x T) {
 	s.size += 1
 }
 
-func (s Stack[T]) Size() int64 {
+func (s Stack[T]) Size() uint64 {
 	return s.size
 }
