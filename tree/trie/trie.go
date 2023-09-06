@@ -47,7 +47,7 @@ func (t *Trie) Search(s string) bool {
 	return true
 }
 
-func (t *Trie) CountWord(s string) (count int) {
+func (t *Trie) Count(s string) (count int) {
 	curNode := t.rootNode
 	normWord := normalizeWord(s)
 	for _, c := range normWord {
