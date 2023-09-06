@@ -34,7 +34,7 @@ func (t *Trie) AddString(s string) {
 	t.height = max(t.height, len(normWord))
 }
 
-func (t *Trie) SearchWord(s string) bool {
+func (t *Trie) Search(s string) bool {
 	curNode := t.rootNode
 	normWord := normalizeWord(s)
 	for _, c := range normWord {

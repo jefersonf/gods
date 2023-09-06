@@ -106,7 +106,7 @@ func TestSearchWord(t *testing.T) {
 			for _, w := range tc.wordSet {
 				trie.AddString(w)
 			}
-			hasFound := trie.SearchWord(tc.word)
+			hasFound := trie.Search(tc.word)
 			if hasFound != tc.searchResult {
 				t.Errorf("Got %t, want %t", hasFound, tc.searchResult)
 			}
