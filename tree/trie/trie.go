@@ -18,9 +18,9 @@ type Node struct {
 	endStringCount int
 }
 
-func (t *Trie) AddString(word string) {
+func (t *Trie) AddString(s string) {
 	curNode := t.rootNode
-	normWord := normalizeWord(word)
+	normWord := normalizeWord(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -28,15 +28,15 @@ func (t *Trie) AddString(word string) {
 		}
 		curNode = curNode.next[index]
 	}
-	if len(word) > 0 {
+	if len(s) > 0 {
 		curNode.endStringCount += 1
 	}
 	t.height = max(t.height, len(normWord))
 }
 
-func (t *Trie) SearchWord(word string) bool {
+func (t *Trie) SearchWord(s string) bool {
 	curNode := t.rootNode
-	normWord := normalizeWord(word)
+	normWord := normalizeWord(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -47,9 +47,9 @@ func (t *Trie) SearchWord(word string) bool {
 	return true
 }
 
-func (t *Trie) CountWord(word string) (count int) {
+func (t *Trie) CountWord(s string) (count int) {
 	curNode := t.rootNode
-	normWord := normalizeWord(word)
+	normWord := normalizeWord(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -86,8 +86,8 @@ func (t *Trie) Height() int {
 	return t.height
 }
 
-func normalizeWord(word string) string {
-	return strings.ToLower(strings.ReplaceAll(word, " ", ""))
+func normalizeWord(s string) string {
+	return strings.ToLower(strings.ReplaceAll(s, " ", ""))
 }
 
 func NewNode(char rune) *Node {
