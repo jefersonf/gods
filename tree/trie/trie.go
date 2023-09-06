@@ -65,7 +65,7 @@ func (t *Trie) Count(s string) (count int) {
 }
 
 // Size returns the number of distinct string inserted in the trie.
-func (t *Trie) Size() (wordCount int) {
+func (t *Trie) Size() (distinctCount int) {
 	queue := make([]*Node, 26)
 	copy(queue, t.rootNode.next)
 	for len(queue) > 0 {
@@ -77,7 +77,7 @@ func (t *Trie) Size() (wordCount int) {
 			continue
 		}
 		if topNode.endStringCount > 0 {
-			wordCount += 1
+			distinctCount += 1
 		}
 		if topNode.next != nil {
 			queue = append(queue, topNode.next...)
