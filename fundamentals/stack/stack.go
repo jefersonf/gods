@@ -49,7 +49,7 @@ func (s *Stack[T]) Push(x T) {
 	s.size += 1
 }
 
-// Size returns the number of elements on the stack
+// Size returns the number of elements in the stack
 func (s Stack[T]) Size() uint64 {
 	return s.size
 }
