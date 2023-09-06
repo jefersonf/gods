@@ -20,7 +20,7 @@ type Node struct {
 
 func (t *Trie) AddString(s string) {
 	curNode := t.rootNode
-	normWord := normalizeWord(s)
+	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -36,7 +36,7 @@ func (t *Trie) AddString(s string) {
 
 func (t *Trie) Search(s string) bool {
 	curNode := t.rootNode
-	normWord := normalizeWord(s)
+	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -49,7 +49,7 @@ func (t *Trie) Search(s string) bool {
 
 func (t *Trie) Count(s string) (count int) {
 	curNode := t.rootNode
-	normWord := normalizeWord(s)
+	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
 		if curNode.next[index] == nil {
@@ -86,7 +86,7 @@ func (t *Trie) Height() int {
 	return t.height
 }
 
-func normalizeWord(s string) string {
+func normalizeStr(s string) string {
 	return strings.ToLower(strings.ReplaceAll(s, " ", ""))
 }
 
