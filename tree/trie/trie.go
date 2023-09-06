@@ -13,9 +13,9 @@ type Trie struct {
 }
 
 type Node struct {
-	char         rune
-	next         []*Node
-	endWordCount int
+	char           rune
+	next           []*Node
+	endStringCount int
 }
 
 func (t *Trie) AddString(word string) {
@@ -29,7 +29,7 @@ func (t *Trie) AddString(word string) {
 		curNode = curNode.next[index]
 	}
 	if len(word) > 0 {
-		curNode.endWordCount += 1
+		curNode.endStringCount += 1
 	}
 	t.height = max(t.height, len(normWord))
 }
@@ -57,7 +57,7 @@ func (t *Trie) CountWord(word string) (count int) {
 		}
 		curNode = curNode.next[index]
 	}
-	count = curNode.endWordCount
+	count = curNode.endStringCount
 	return
 }
 
@@ -72,7 +72,7 @@ func (t *Trie) WordCount() (wordCount int) {
 		if topNode == nil {
 			continue
 		}
-		if topNode.endWordCount > 0 {
+		if topNode.endStringCount > 0 {
 			wordCount += 1
 		}
 		if topNode.next != nil {
