@@ -216,7 +216,7 @@ func TestWordCount(t *testing.T) {
 			for _, w := range tc.wordSet {
 				trie.AddString(w)
 			}
-			wordCount := trie.WordCount()
+			wordCount := trie.Size()
 			if wordCount != tc.wordCount {
 				t.Errorf("Got %d, want %d", wordCount, tc.wordCount)
 			}

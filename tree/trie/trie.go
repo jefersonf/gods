@@ -61,7 +61,7 @@ func (t *Trie) Count(s string) (count int) {
 	return
 }
 
-func (t *Trie) WordCount() (wordCount int) {
+func (t *Trie) Size() (wordCount int) {
 	queue := make([]*Node, 26)
 	copy(queue, t.rootNode.next)
 	for len(queue) > 0 {
