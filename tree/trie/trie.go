@@ -18,6 +18,7 @@ type Node struct {
 	endStringCount int
 }
 
+// AddString inserts a new string to trie.
 func (t *Trie) AddString(s string) {
 	currentNode := t.rootNode
 	normWord := normalizeStr(s)
@@ -34,6 +35,7 @@ func (t *Trie) AddString(s string) {
 	t.height = max(t.height, len(normWord))
 }
 
+// Search checks whether the string s belongs to trie.
 func (t *Trie) Search(s string) bool {
 	currentNode := t.rootNode
 	normWord := normalizeStr(s)
@@ -47,6 +49,7 @@ func (t *Trie) Search(s string) bool {
 	return true
 }
 
+// Count returns how many times a string s was inserted in the trie.
 func (t *Trie) Count(s string) (count int) {
 	currentNode := t.rootNode
 	normWord := normalizeStr(s)
@@ -61,6 +64,7 @@ func (t *Trie) Count(s string) (count int) {
 	return
 }
 
+// Size returns the number of distinct string inserted in the trie.
 func (t *Trie) Size() (wordCount int) {
 	queue := make([]*Node, 26)
 	copy(queue, t.rootNode.next)
@@ -82,6 +86,7 @@ func (t *Trie) Size() (wordCount int) {
 	return
 }
 
+// Height returns the lenght of the longest string inserted in the trie.
 func (t *Trie) Height() int {
 	return t.height
 }
@@ -90,6 +95,7 @@ func normalizeStr(s string) string {
 	return strings.ToLower(strings.ReplaceAll(s, " ", ""))
 }
 
+// NewNode creates a new Trie node by passing it a rune.
 func NewNode(char rune) *Node {
 	return &Node{
 		char: char,
@@ -97,6 +103,7 @@ func NewNode(char rune) *Node {
 	}
 }
 
+// New return a new trie.
 func New() *Trie {
 	return &Trie{rootNode: NewNode('$')}
 }
