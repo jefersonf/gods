@@ -19,45 +19,45 @@ type Node struct {
 }
 
 func (t *Trie) AddString(s string) {
-	curNode := t.rootNode
+	currentNode := t.rootNode
 	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
-		if curNode.next[index] == nil {
-			curNode.next[index] = NewNode(c)
+		if currentNode.next[index] == nil {
+			currentNode.next[index] = NewNode(c)
 		}
-		curNode = curNode.next[index]
+		currentNode = currentNode.next[index]
 	}
 	if len(s) > 0 {
-		curNode.endStringCount += 1
+		currentNode.endStringCount += 1
 	}
 	t.height = max(t.height, len(normWord))
 }
 
 func (t *Trie) Search(s string) bool {
-	curNode := t.rootNode
+	currentNode := t.rootNode
 	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
-		if curNode.next[index] == nil {
+		if currentNode.next[index] == nil {
 			return false
 		}
-		curNode = curNode.next[index]
+		currentNode = currentNode.next[index]
 	}
 	return true
 }
 
 func (t *Trie) Count(s string) (count int) {
-	curNode := t.rootNode
+	currentNode := t.rootNode
 	normWord := normalizeStr(s)
 	for _, c := range normWord {
 		index := c - 'a'
-		if curNode.next[index] == nil {
+		if currentNode.next[index] == nil {
 			return
 		}
-		curNode = curNode.next[index]
+		currentNode = currentNode.next[index]
 	}
-	count = curNode.endStringCount
+	count = currentNode.endStringCount
 	return
 }
 
