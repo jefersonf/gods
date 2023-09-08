@@ -29,3 +29,16 @@ func (t *DSU) FindSet(v uint64) uint64 {
 	t.parent[v] = t.FindSet(t.parent[v])
 	return t.parent[v]
 }
+
+func New(n uint64) *DSU {
+	dsu := &DSU{
+		parent: make([]uint64, n+1),
+		size:   make([]uint64, n+1),
+	}
+
+	for i := uint64(1); i <= n; i++ {
+		dsu.MakeSet(i)
+	}
+
+	return dsu
+}
