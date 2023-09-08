@@ -41,3 +41,35 @@ func TestMakeSet(t *testing.T) {
 	}
 
 }
+
+func TestSize(t *testing.T) {
+
+	testcases := []struct {
+		n    uint64
+		size uint64
+	}{
+		{
+			n:    0,
+			size: 0,
+		},
+		{
+			n:    1,
+			size: 1,
+		},
+		{
+			n:    5,
+			size: 5,
+		},
+	}
+
+	for _, tc := range testcases {
+		t.Run(fmt.Sprintf("ArrayOfLength=%d", tc.n), func(t *testing.T) {
+			dsu := New(tc.n)
+			dsuLen := dsu.Size()
+			if dsuLen != tc.size {
+				t.Errorf("Got %v, want %v", dsuLen, tc.size)
+			}
+		})
+	}
+
+}
