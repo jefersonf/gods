@@ -42,38 +42,6 @@ func TestMakeSet(t *testing.T) {
 
 }
 
-func TestSize(t *testing.T) {
-
-	testcases := []struct {
-		n    uint64
-		size uint64
-	}{
-		{
-			n:    0,
-			size: 0,
-		},
-		{
-			n:    1,
-			size: 1,
-		},
-		{
-			n:    5,
-			size: 5,
-		},
-	}
-
-	for _, tc := range testcases {
-		t.Run(fmt.Sprintf("ArrayOfLength=%d", tc.n), func(t *testing.T) {
-			dsu := New(tc.n)
-			dsuLen := dsu.Size()
-			if dsuLen != tc.size {
-				t.Errorf("Got %v, want %v", dsuLen, tc.size)
-			}
-		})
-	}
-
-}
-
 func TestFindSet(t *testing.T) {
 
 	testcases := []struct {
@@ -135,6 +103,99 @@ func TestFindSet(t *testing.T) {
 			parentId := dsu.FindSet(tc.id)
 			if parentId != tc.parentId {
 				t.Errorf("Got %v, want %v", parentId, tc.parentId)
+			}
+		})
+	}
+}
+
+func TestUnionSets(t *testing.T) {
+
+	testcases := []struct {
+		n       uint64
+		id1     uint64
+		id2     uint64
+		unions  [][2]uint64
+		sameSet bool
+	}{
+		{
+			n:       1,
+			id1:     1,
+			id2:     1,
+			unions:  [][2]uint64{},
+			sameSet: true,
+		},
+		{
+			n:       2,
+			id1:     1,
+			id2:     2,
+			unions:  [][2]uint64{},
+			sameSet: false,
+		},
+		{
+			n:       2,
+			id1:     1,
+			id2:     2,
+			unions:  [][2]uint64{{2, 1}},
+			sameSet: true,
+		},
+		{
+			n:       2,
+			id1:     1,
+			id2:     2,
+			unions:  [][2]uint64{{1, 2}},
+			sameSet: true,
+		},
+		{
+			n:       3,
+			id1:     1,
+			id2:     3,
+			unions:  [][2]uint64{{1, 2}},
+			sameSet: false,
+		},
+	}
+
+	for _, tc := range testcases {
+		t.Run(fmt.Sprintf("SameSet=%t", tc.sameSet), func(t *testing.T) {
+			dsu := New(tc.n)
+			for _, p := range tc.unions {
+				dsu.UnionSets(p[0], p[1])
+			}
+			a := dsu.FindSet(tc.id1)
+			b := dsu.FindSet(tc.id2)
+			sameSet := a == b
+			if sameSet != tc.sameSet {
+				t.Errorf("Got %t, want %t", sameSet, tc.sameSet)
+			}
+		})
+	}
+}
+
+func TestSize(t *testing.T) {
+
+	testcases := []struct {
+		n    uint64
+		size uint64
+	}{
+		{
+			n:    0,
+			size: 0,
+		},
+		{
+			n:    1,
+			size: 1,
+		},
+		{
+			n:    5,
+			size: 5,
+		},
+	}
+
+	for _, tc := range testcases {
+		t.Run(fmt.Sprintf("ArrayOfLength=%d", tc.n), func(t *testing.T) {
+			dsu := New(tc.n)
+			dsuLen := dsu.Size()
+			if dsuLen != tc.size {
+				t.Errorf("Got %v, want %v", dsuLen, tc.size)
 			}
 		})
 	}
