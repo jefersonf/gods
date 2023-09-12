@@ -13,12 +13,14 @@ func (t *DSU) MakeSet(v uint64) {
 func (t *DSU) UnionSets(a, b uint64) {
 	a = t.FindSet(a)
 	b = t.FindSet(b)
-	if a != b {
-		if t.size[a] < t.size[b] {
-			a, b = b, a
+	x := min(a, b)
+	y := max(a, b)
+	if x != y {
+		if t.size[x] < t.size[y] {
+			x, y = y, x
 		}
-		t.parent[b] = a
-		t.size[a] += t.size[b]
+		t.parent[y] = x
+		t.size[x] += t.size[y]
 	}
 }
 
