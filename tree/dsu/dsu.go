@@ -5,11 +5,13 @@ type DSU struct {
 	size   []uint64
 }
 
+// MakeSet assigns the initial set ID for a node
 func (t *DSU) MakeSet(v uint64) {
 	t.parent[v] = v
 	t.size[v] = 1
 }
 
+// UnionSets joins the sets belonging to two different nodes
 func (t *DSU) UnionSets(a, b uint64) {
 	a = t.FindSet(a)
 	b = t.FindSet(b)
@@ -24,6 +26,7 @@ func (t *DSU) UnionSets(a, b uint64) {
 	}
 }
 
+// FindSet returns the set ID of a node
 func (t *DSU) FindSet(v uint64) uint64 {
 	if v == t.parent[v] {
 		return v
@@ -32,19 +35,19 @@ func (t *DSU) FindSet(v uint64) uint64 {
 	return t.parent[v]
 }
 
+// Size returns the size of the DSU
 func (t *DSU) Size() uint64 {
 	return uint64(len(t.parent) - 1)
 }
 
+// New creates a new DSU instance by passing a size
 func New(n uint64) *DSU {
 	dsu := &DSU{
 		parent: make([]uint64, n+1),
 		size:   make([]uint64, n+1),
 	}
-
 	for i := uint64(1); i <= n; i++ {
 		dsu.MakeSet(i)
 	}
-
 	return dsu
 }
