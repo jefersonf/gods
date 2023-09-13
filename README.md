@@ -17,6 +17,12 @@ $ cd tree/segment
 $ go test -v
 ```
 
+
+### Fundamentals
+
+- Queue
+- Stack
+
 ### Tree
 
 - DSU (Disjoint-Set Union)
