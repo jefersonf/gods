@@ -15,7 +15,7 @@
 
 - DSU (Disjoint-Set Union)
 - Segment Tree
-- Fenwick (Binary-index Tree)
+- Fenwick Tree (Binary-index Tree)
 - Trie
 
 ## Tests
