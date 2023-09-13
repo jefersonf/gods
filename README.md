@@ -1,7 +1,5 @@
 # Go Data Structures
 
-Go (uncommon) data structures
-
 ## Requirements
 
 - Go 1.18+
