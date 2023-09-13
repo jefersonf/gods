@@ -6,17 +6,7 @@ Go (uncommon) data structures
 
 - Go 1.18+
 
-## Runing tests
-
-### Example
-
-Running tests for `Segment tree`.
-
-```
-$ cd tree/segment
-$ go test -v
-```
-
+## Implementations
 
 ### Fundamentals
 
@@ -29,3 +19,12 @@ $ go test -v
 - Segment Tree
 - Fenwick (Binary-index Tree)
 - Trie
+
+## Tests
+
+Running tests example for `Segment tree`.
+
+```
+$ cd tree/segment
+$ go test -v
+```
