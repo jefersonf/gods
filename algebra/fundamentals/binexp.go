@@ -1,6 +1,13 @@
 package fundamentals
 
-func RecursivePow(a, b uint64) uint64 {
+import "golang.org/x/exp/constraints"
+
+// Number represents a Numeric value.
+type Number interface {
+	constraints.Integer
+}
+
+func RecursivePow[T Number](a, b T) T {
 	if b == 0 {
 		return 1
 	}
@@ -11,7 +18,7 @@ func RecursivePow(a, b uint64) uint64 {
 	return p * p
 }
 
-func RecursivePowMod(a, b, m uint64) uint64 {
+func RecursivePowMod[T Number](a, b, m T) T {
 	if b == 0 {
 		return 1
 	}
@@ -22,8 +29,8 @@ func RecursivePowMod(a, b, m uint64) uint64 {
 	return p * p % m
 }
 
-func IterativePow(a, b uint64) uint64 {
-	var ans uint64 = 1
+func IterativePow[T Number](a, b T) T {
+	var ans T = 1
 	for b > 0 {
 		if b%2 != 0 {
 			ans = ans * a
@@ -34,8 +41,8 @@ func IterativePow(a, b uint64) uint64 {
 	return ans
 }
 
-func IterativePowMod(a, b, m uint64) uint64 {
-	var ans uint64 = 1
+func IterativePowMod[T Number](a, b, m T) T {
+	var ans T = 1
 	for b > 0 {
 		if b%2 != 0 {
 			ans = ans * a % m
@@ -46,7 +53,7 @@ func IterativePowMod(a, b, m uint64) uint64 {
 	return ans % m
 }
 
-func Pow(a, b uint64, isIterative bool) uint64 {
+func Pow[T Number](a, b T, isIterative bool) T {
 	if isIterative {
 		return IterativePow(a, b)
 	}
