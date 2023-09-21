@@ -33,6 +33,18 @@ func IterativePow(a, b uint64) uint64 {
 	}
 	return ans
 }
+å
+func IterativePowMod(a, b, m uint64) uint64 {
+	var ans uint64 = 1
+	for b > 0 {
+		if b%2 != 0 {
+			ans = ans * a % m
+		}
+		a = a * a % m
+		b >>= 1
+	}
+	return ans % m
+}
 
 func Pow(a, b uint64, isIterative bool) uint64 {
 	if isIterative {
