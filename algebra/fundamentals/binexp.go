@@ -11,6 +11,17 @@ func RecursivePow(a, b uint64) uint64 {
 	return p * p
 }
 
+func RecursivePowMod(a, b, m uint64) uint64 {
+	if b == 0 {
+		return 1
+	}
+	p := RecursivePow(a, b/2) % m
+	if b%2 != 0 {
+		return p * p * a % m
+	}
+	return p * p % m
+}
+
 func IterativePow(a, b uint64) uint64 {
 	var ans uint64 = 1
 	for b > 0 {
