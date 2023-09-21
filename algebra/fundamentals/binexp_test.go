@@ -2,14 +2,14 @@ package fundamentals
 
 import "testing"
 
-type TestCase struct {
+type BinExpTestCase struct {
 	base uint64
 	exp  uint64
 	pow  uint64
 }
 
-func loadTestCases() []TestCase {
-	testcases := []TestCase{
+func loadBinExpTestCases() []BinExpTestCase {
+	testcases := []BinExpTestCase{
 		{
 			base: 1,
 			exp:  0,
@@ -51,7 +51,7 @@ func loadTestCases() []TestCase {
 }
 
 func TestRecursivePow(t *testing.T) {
-	for _, tc := range loadTestCases() {
+	for _, tc := range loadBinExpTestCases() {
 		pow := RecursivePow(tc.base, tc.exp)
 		if pow != tc.pow {
 			t.Errorf("Pow(%d, %d), Got %d, want %d", tc.base, tc.exp, pow, tc.pow)
@@ -60,7 +60,7 @@ func TestRecursivePow(t *testing.T) {
 }
 
 func TestIterativePow(t *testing.T) {
-	for _, tc := range loadTestCases() {
+	for _, tc := range loadBinExpTestCases() {
 		pow := IterativePow(tc.base, tc.exp)
 		if pow != tc.pow {
 			t.Errorf("Pow(%d, %d), Got %d, want %d", tc.base, tc.exp, pow, tc.pow)
