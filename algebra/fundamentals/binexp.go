@@ -7,6 +7,7 @@ type Number interface {
 	constraints.Integer
 }
 
+// RecursivePow returns a raised to the power of b using recursive approach.
 func RecursivePow[T Number](a, b T) T {
 	if b == 0 {
 		return 1
@@ -18,6 +19,7 @@ func RecursivePow[T Number](a, b T) T {
 	return p * p
 }
 
+// RecursivePowMod returns a raised to the power of b using recursive approach and module remainder.
 func RecursivePowMod[T Number](a, b, m T) T {
 	if b == 0 {
 		return 1
@@ -29,6 +31,7 @@ func RecursivePowMod[T Number](a, b, m T) T {
 	return p * p % m
 }
 
+// IterativePow returns a raised to the power of b using iterative approach.
 func IterativePow[T Number](a, b T) T {
 	var ans T = 1
 	for b > 0 {
@@ -41,6 +44,7 @@ func IterativePow[T Number](a, b T) T {
 	return ans
 }
 
+// IterativePowMod returns a raised to the power of b using iterative approach and module remainder.
 func IterativePowMod[T Number](a, b, m T) T {
 	var ans T = 1
 	for b > 0 {
@@ -53,6 +57,8 @@ func IterativePowMod[T Number](a, b, m T) T {
 	return ans % m
 }
 
+// Pow returns a raised to the power of b, you must pass
+// a flag to either user iterative or recursice approach.
 func Pow[T Number](a, b T, isIterative bool) T {
 	if isIterative {
 		return IterativePow(a, b)
