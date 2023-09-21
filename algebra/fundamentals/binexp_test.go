@@ -51,7 +51,6 @@ func loadTestCases() []TestCase {
 }
 
 func TestRecursivePow(t *testing.T) {
-
 	for _, tc := range loadTestCases() {
 		pow := RecursivePow(tc.base, tc.exp)
 		if pow != tc.pow {
@@ -61,7 +60,6 @@ func TestRecursivePow(t *testing.T) {
 }
 
 func TestIterativePow(t *testing.T) {
-
 	for _, tc := range loadTestCases() {
 		pow := IterativePow(tc.base, tc.exp)
 		if pow != tc.pow {
