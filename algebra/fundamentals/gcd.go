@@ -1,7 +1,7 @@
 package fundamentals
 
 // RecursiveGCD returns GCD using recursive approach.
-func RecursiveGCD(a, b int) int {
+func RecursiveGCD[T Number](a, b T) T {
 	if b == 0 {
 		return a
 	}
@@ -9,7 +9,7 @@ func RecursiveGCD(a, b int) int {
 }
 
 // IterativeGCD returns GCD using iterative approach.
-func IterativeGCD(a, b int) int {
+func IterativeGCD[T Number](a, b T) T {
 	for b > 0 {
 		a %= b
 		a, b = b, a
@@ -18,7 +18,7 @@ func IterativeGCD(a, b int) int {
 }
 
 // GCD returns the greated common divisor of a and b
-func GCD(a, b int, isIterative bool) int {
+func GCD[T Number](a, b T, isIterative bool) T {
 	if isIterative {
 		return IterativeGCD(a, b)
 	}
