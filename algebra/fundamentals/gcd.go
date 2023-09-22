@@ -17,10 +17,15 @@ func IterativeGCD[T Number](a, b T) T {
 	return a
 }
 
-// GCD returns the greated common divisor of a and b
+// GCD returns the greated common divisor of a and b.
 func GCD[T Number](a, b T, isIterative bool) T {
 	if isIterative {
 		return IterativeGCD(a, b)
 	}
 	return RecursiveGCD(a, b)
+}
+
+// LCM returns the least common multiple of a and b.
+func LCM[T Number](a, b T) T {
+	return a / GCD[T](a, b, true) * b
 }
