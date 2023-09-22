@@ -15,3 +15,17 @@ func TestExtendedGCD(t *testing.T) {
 		t.Errorf("Got GCD=%d x=%d y=%d, want GCD=%d x=%d y=%d", gcd, x, y, gcdResult, 0, 0)
 	}
 }
+
+func TestIterativeExtendedGCD(t *testing.T) {
+	var (
+		a         = 55
+		b         = 80
+		gcdResult = 5
+	)
+
+	var x, y int
+	gcd := IterativeExtendedGCD(a, b, &x, &y)
+	if gcd != gcdResult {
+		t.Errorf("Got GCD=%d x=%d y=%d, want GCD=%d x=%d y=%d", gcd, x, y, gcdResult, 0, 0)
+	}
+}
