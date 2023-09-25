@@ -4,9 +4,16 @@
 
 - Go 1.18+
 
-## Implementations
+### Algebra
 
-### Fundamentals
+#### Fundamentals
+
+- Binary Exponentiation
+- GCD (Greatest Common Divisor)
+- Extented GCD
+- LCM (Least Common Mutiple)
+
+### Basic Data Structtures
 
 - Queue
 - Stack
