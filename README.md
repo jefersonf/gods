@@ -13,7 +13,7 @@
 - Extented GCD
 - LCM (Least Common Mutiple)
 
-### Basic Data Structtures
+### Basic Data Structures
 
 - Queue
 - Stack
