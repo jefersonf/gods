@@ -1,5 +1,6 @@
 package primenumbers
 
+// TrialDivision returns the list of factors of a given number using iterative division. 
 func TrialDivision[T Number](n T) []T {
 	factorization := make([]T, 0, 2)
 	var d T
