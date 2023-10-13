@@ -9,6 +9,7 @@ type Number interface {
 
 type sieve []bool
 
+// NewSieve returns a new sieve
 func NewSieve[T Number](n T) sieve {
 	isPrime := make([]bool, n+1)
 	for i := range isPrime {
