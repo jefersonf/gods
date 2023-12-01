@@ -10,8 +10,8 @@
 
 - Binary Exponentiation
 - GCD (Greatest Common Divisor)
-- Extented GCD
-- LCM (Least Common Mutiple)
+- Extended GCD
+- LCM (Least Common Multiple)
 
 ### Basic Data Structures
 
