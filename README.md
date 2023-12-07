@@ -33,3 +33,4 @@ Running tests example for `Segment tree`.
 $ cd tree/segment
 $ go test -v
 ```
+## Contributions are Welcome!
