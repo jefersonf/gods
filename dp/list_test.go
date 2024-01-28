@@ -22,6 +22,18 @@ func TestLIS(t *testing.T) {
 			input: []int{50, 3, 10, 7, 40, 80},
 			want:  4,
 		},
+		{
+			input: []int{1},
+			want:  1,
+		},
+		{
+			input: []int{1, 2, 3, 4, 5},
+			want:  5,
+		},
+		{
+			input: []int{50, 3, 10, 10, 7, 40, 80, 80},
+			want:  4,
+		},
 	}
 
 	for _, tc := range testcases {
