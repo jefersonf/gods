@@ -25,9 +25,15 @@ func TestLIS(t *testing.T) {
 	}
 
 	for _, tc := range testcases {
-		n, _ := LIS(tc.input...)
+		n, sample := LIS(tc.input...)
 		if n != uint64(tc.want) {
 			t.Fatalf("Output array length mismath: got %v, want %v", n, tc.want)
 		}
+		for i := 1; i < len(sample); i++ {
+			if sample[i] < sample[i-1] {
+				t.Fatalf("Output array does not match contraint: got %v", sample)
+			}
+		}
+
 	}
 }
