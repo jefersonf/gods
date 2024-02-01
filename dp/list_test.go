@@ -43,7 +43,7 @@ func TestLIS(t *testing.T) {
 		}
 		for i := 1; i < len(sample); i++ {
 			if sample[i] < sample[i-1] {
-				t.Fatalf("Array does not match length contraint: got %v", sample)
+				t.Fatalf("Array does not match LIS contraint: got %v", sample)
 			}
 		}
 
