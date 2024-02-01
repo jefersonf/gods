@@ -9,7 +9,7 @@ type Number interface {
 	constraints.Integer
 }
 
-// LIS returns the longest inscreasing subsequence in the given array of numbers.
+// LIS returns the longest increasing subsequence in the given array of numbers.
 func LIS[T Number](a ...T) (uint64, []T) {
 	inputSize := len(a)
 	aux := make([]uint64, inputSize)
