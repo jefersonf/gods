@@ -35,7 +35,7 @@ func (t *DSU) FindSet(v uint64) uint64 {
 	return t.parent[v]
 }
 
-// IsSameSet retusns a true when u and v are in the same set, otherwise false
+// IsSameSet returns a true when u and v are in the same set, otherwise false
 func (t *DSU) IsSameSet(u, v uint64) bool {
 	return t.FindSet(u) == t.FindSet(v)
 }
