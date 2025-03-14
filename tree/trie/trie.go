@@ -35,8 +35,8 @@ func (t *Trie) AddString(s string) {
 	t.height = max(t.height, len(normWord))
 }
 
-// Search checks whether the string s belongs to trie.
-func (t *Trie) Search(s string) bool {
+// SearchPrefix checks whether the string s belongs to trie.
+func (t *Trie) SearchPrefix(s string) bool {
 	currentNode := t.rootNode
 	normWord := normalizeStr(s)
 	for _, c := range normWord {
