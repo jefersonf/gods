@@ -51,7 +51,7 @@ func TestHeight(t *testing.T) {
 	}
 }
 
-func TestSearchWord(t *testing.T) {
+func TestSearchPrefixWord(t *testing.T) {
 
 	testcases := []struct {
 		wordSet      []string
@@ -98,6 +98,11 @@ func TestSearchWord(t *testing.T) {
 			word:         "strawberry",
 			searchResult: false,
 		},
+		{
+			wordSet:      []string{"picture", "footage"},
+			word:         "foot",
+			searchResult: true,
+		},
 	}
 
 	for i, tc := range testcases {
@@ -106,7 +111,7 @@ func TestSearchWord(t *testing.T) {
 			for _, w := range tc.wordSet {
 				trie.AddString(w)
 			}
-			hasFound := trie.Search(tc.word)
+			hasFound := trie.SearchPrefix(tc.word)
 			if hasFound != tc.searchResult {
 				t.Errorf("Got %t, want %t", hasFound, tc.searchResult)
 			}
