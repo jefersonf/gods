@@ -14,7 +14,7 @@ type Queue[T any] struct {
 	data []T
 }
 
-// Newn returns a new queue
+// New returns a new queue.
 func New[T any](nums ...T) *Queue[T] {
 	return &Queue[T]{
 		size: uint64(len(nums)),
@@ -22,7 +22,7 @@ func New[T any](nums ...T) *Queue[T] {
 	}
 }
 
-// Front returns the first element inserted into the queue
+// Front returns the first element inserted into the queue.
 func (q *Queue[T]) Front() (v T, err error) {
 	if q.size < 1 {
 		err = errIndexOutOfBound
@@ -32,13 +32,13 @@ func (q *Queue[T]) Front() (v T, err error) {
 	return v, nil
 }
 
-// Push inserts a new element into queue
+// Push inserts a new element into queue.
 func (q *Queue[T]) Push(x T) {
 	q.data = append(q.data, x)
 	q.size += 1
 }
 
-// PopBack returns the last element inserted by removing it from queue
+// PopBack returns the last element inserted by removing it from queue.
 func (q *Queue[T]) PopBack() (v T, err error) {
 	if q.size < 1 {
 		err = errIndexOutOfBound
@@ -52,7 +52,7 @@ func (q *Queue[T]) PopBack() (v T, err error) {
 	return b, err
 }
 
-// PopFront returns the first element inserted by removing it from queue
+// PopFront returns the first element inserted by removing it from queue.
 func (q *Queue[T]) PopFront() (v T, err error) {
 	if q.size < 1 {
 		err = errIndexOutOfBound
@@ -66,12 +66,12 @@ func (q *Queue[T]) PopFront() (v T, err error) {
 	return f, err
 }
 
-// Size returns the number of elements in the queue
+// Size returns the number of elements in the queue.
 func (q Queue[T]) Size() uint64 {
 	return q.size
 }
 
-// IsEmpty checks whether the queue is empty or not
+// IsEmpty checks whether the queue is empty or not.
 func (q Queue[T]) IsEmpty() bool {
 	return q.size == 0
 }
