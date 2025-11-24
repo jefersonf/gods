@@ -35,7 +35,7 @@ func TestBuild(t *testing.T) {
 			in:       a,
 			joinType: "minimun",
 			joinFunc: func(n1, n2 *SegNode[int32]) SegNode[int32] {
-				return min(n1, n2)
+				return Min(n1, n2)
 			},
 			rootNode: SegNode[int32]{
 				value: 1,
@@ -45,7 +45,7 @@ func TestBuild(t *testing.T) {
 			in:       a,
 			joinType: "maximum",
 			joinFunc: func(n1, n2 *SegNode[int32]) SegNode[int32] {
-				return max(n1, n2)
+				return Max(n1, n2)
 			},
 			rootNode: SegNode[int32]{
 				value: 5,
@@ -160,7 +160,7 @@ func TestSet(t *testing.T) {
 			in:       a,
 			joinType: "max",
 			joinFunc: func(n1, n2 *SegNode[int32]) SegNode[int32] {
-				return max(n1, n2)
+				return Max(n1, n2)
 			},
 			rootNode: SegNode[int32]{
 				value: 100,
@@ -251,7 +251,7 @@ func TestQueryRange(t *testing.T) {
 			in:       a,
 			joinType: "max",
 			joinFunc: func(n1, n2 *SegNode[int32]) SegNode[int32] {
-				return max(n1, n2)
+				return Max(n1, n2)
 			},
 			rangeResults: [5][5]int32{
 				{1, 2, 3, 4, 5},
@@ -279,7 +279,7 @@ func TestQueryRange(t *testing.T) {
 	}
 }
 
-func min[T int32](n1, n2 *SegNode[T]) SegNode[T] {
+func Min[T int32](n1, n2 *SegNode[T]) SegNode[T] {
 	sn := SegNode[T]{
 		value: math.MaxInt32,
 	}
@@ -292,7 +292,7 @@ func min[T int32](n1, n2 *SegNode[T]) SegNode[T] {
 	return sn
 }
 
-func max[T int32](n1, n2 *SegNode[T]) SegNode[T] {
+func Max[T int32](n1, n2 *SegNode[T]) SegNode[T] {
 	sn := SegNode[T]{
 		value: math.MinInt32,
 	}
